@@ -67,37 +67,16 @@ pipeline {
     post {
 
         success {
-
-            script {
-
-                def payload = [
-                    content: "✅ Build SUCCESS on ${env.BRANCH_NAME}\nBuild URL: ${env.BUILD_URL}"
-                ]
-
-                httpRequest(
-                    httpMode: 'POST',
-                    contentType: 'APPLICATION_JSON',
-                    requestBody: groovy.json.JsonOutput.toJson(payload),
-                    url: "${DISCORD_WEBHOOK}"
-                )
-            }
+            echo 'Build Successful'
         }
 
         failure {
-
-            script {
-
-                def payload = [
-                    content: "❌ Build FAILED on ${env.BRANCH_NAME}\nBuild URL: ${env.BUILD_URL}"
-                ]
-
-                httpRequest(
-                    httpMode: 'POST',
-                    contentType: 'APPLICATION_JSON',
-                    requestBody: groovy.json.JsonOutput.toJson(payload),
-                    url: "${DISCORD_WEBHOOK}"
-                )
-            }
+            echo 'Build Failed'
         }
+
+        always {
+            echo 'Pipeline Finished'
+        }
+    
     }
 }
