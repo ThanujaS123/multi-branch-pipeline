@@ -5,7 +5,6 @@ pipeline {
     environment {
         IMAGE_NAME = "flask-app"
         CONTAINER_NAME = "flask-container"
-        DISCORD_WEBHOOK = "YOUR_DISCORD_WEBHOOK_URL"
     }
 
     stages {
